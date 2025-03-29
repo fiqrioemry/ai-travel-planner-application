@@ -2,6 +2,7 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import callApi from "@/api/callApi";
 import { persist } from "zustand/middleware";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 
 export const useAuthStore = create(
   persist(
@@ -10,55 +11,33 @@ export const useAuthStore = create(
       accessToken: null,
       loading: false,
       checkingAuth: true,
-
-      setAccessToken: (accessToken) => set({ accessToken }),
-
-      authCheck: async () => {
+      getUserProfile: async (token) => {
         try {
-          const { user } = await callApi.authCheck();
-          set({ user });
-        } catch {
-          set({ user: null });
-        } finally {
-          set({ checkingAuth: false });
-        }
-      },
-
-      login: async (formData) => {
-        set({ loading: true });
-        try {
-          const { message, accessToken, user } = await callApi.login(formData);
-          set({ user, accessToken });
-          toast.success(message);
+          const response = await callApi.getUserProfile(token);
+          set({ user: response.data });
+          window.location.reload();
         } catch (error) {
-          toast.error(error.message);
-        } finally {
-          set({ loading: false });
+          console.log(error);
         }
       },
+
+      login: () =>
+        useGoogleLogin({
+          onSuccess: (codeResp) => GetUserProfile(codeResp),
+          onError: (error) => console.log(error),
+        }),
 
       logout: async () => {
         try {
-          const { message } = await callApi.logout();
-          toast.success(message);
-          set({ user: null, accessToken: null });
+          googleLogout();
+          set({ user: null });
+          window.location.reload();
         } catch (error) {
-          console.log(error.message);
-        }
-      },
-
-      register: async (formData) => {
-        set({ loading: true });
-        try {
-          const { message } = await callApi.register(formData);
-          toast.success(message);
-        } catch (error) {
-          toast.error(error.message);
-        } finally {
-          set({ loading: false });
+          console.log(error);
         }
       },
     }),
+
     {
       name: "auth",
       storage: {

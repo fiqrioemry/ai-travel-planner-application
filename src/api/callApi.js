@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { authInstance, publicInstance } from '.';
 const errorHandle = (error) => {
   const errorMessage = error.response?.data?.message;
@@ -7,8 +8,23 @@ const errorHandle = (error) => {
 const callApi = {
   // User Authentication management
   login: async (formData) => {
-    return publicInstance
+    return axios
       .post('/auth/login', formData)
+      .then((res) => res.data)
+      .catch(errorHandle);
+  },
+
+  getUserProfile: async (token) => {
+    return axios
+      .get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?acess_token=${token}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token?.access_token}`,
+            Accept: 'Application/json',
+          },
+        },
+      )
       .then((res) => res.data)
       .catch(errorHandle);
   },
