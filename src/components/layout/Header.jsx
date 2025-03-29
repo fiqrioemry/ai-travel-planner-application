@@ -4,14 +4,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import React from "react";
-import Logo from "../Logo";
+import Logo from "@/components/Logo";
 import { useTheme } from "@/hooks/useTheme";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { LogOut, Moon, Sun } from "lucide-react";
 import GoogleLogin from "@/components/GoogleLogin";
 import { useAuthStore } from "@/store/useAuthStore";
-import { LogOut, Moon, Sun } from "lucide-react";
 
 function Header() {
   const { user, login, logout } = useAuthStore();

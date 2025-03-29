@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Compass, Map, Hotel } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Home = () => {
   const handleNewTrip = async () => {
     if (!user) {
       await login();
+      navigate("/create-trip");
     } else {
       navigate("/create-trip");
     }
@@ -30,7 +32,7 @@ const Home = () => {
           AI pintar, kami bantu kamu memilih destinasi, menyusun itinerary, dan
           menemukan hotel terbaik — secara otomatis dan personal.
         </p>
-        <Button size="lg" onCLick={handleNewTrip} className="rounded-full px-4">
+        <Button size="lg" onClick={handleNewTrip} className="rounded-full px-4">
           Mulai Sekarang
         </Button>
       </div>
