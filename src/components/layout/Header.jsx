@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Popover,
   PopoverContent,
@@ -38,11 +39,11 @@ const UserMenu = ({ user, logout }) => {
   return (
     <div className="flex items-center gap-3">
       <a href="/create-trip">
-        <Button className="rounded-full">+ Create Trip</Button>
+        <Button className="rounded-full px-4">+ Atur liburan</Button>
       </a>
       <a href="/my-trips">
-        <Button variant="outline" className="rounded-full">
-          My Trips
+        <Button variant="outline" className="rounded-full px-4">
+          Perjalanku
         </Button>
       </a>
       <Popover>
@@ -53,11 +54,13 @@ const UserMenu = ({ user, logout }) => {
             className="h-9 w-9 rounded-full"
           />
         </PopoverTrigger>
-        <PopoverContent className="w-64 p-4 space-y-4">
-          <div className="font-semibold text-sm">Hai, {user.displayName}</div>
+        <PopoverContent className="w-48 p-2 space-y-4">
+          <div className="font-semibold text-sm px-2">
+            Halo, {user.displayName}
+          </div>
 
           {/* Toggle Switch */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between px-2">
             <div className="flex items-center gap-2">
               {isDark ? (
                 <Moon className="w-4 h-4" />
@@ -68,14 +71,10 @@ const UserMenu = ({ user, logout }) => {
                 {isDark ? "Dark Mode" : "Light Mode"}
               </span>
             </div>
-            {/* <Switch checked={isDark} onCheckedChange={toggleDark} /> */}
+            <Switch checked={isDark} onCheckedChange={toggleDark} />
           </div>
 
-          <Button
-            onClick={logout}
-            variant="destructive"
-            className="w-full flex justify-start gap-2"
-          >
+          <Button onClick={logout} className="w-full flex justify-start gap-2">
             <LogOut className="w-4 h-4" />
             Logout
           </Button>

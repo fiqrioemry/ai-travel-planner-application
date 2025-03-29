@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogDescription,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import Logo from "./Logo";
@@ -21,7 +22,7 @@ const GoogleLogin = ({ login }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="px-6">Ayo mulai</Button>
+        <Button className="rounded-full px-6">Ayo mulai</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[420px] text-center py-10 px-6">
         <DialogHeader className="space-y-4">
@@ -29,13 +30,13 @@ const GoogleLogin = ({ login }) => {
             <Logo />
           </div>
           <DialogDescription className="text-muted-foreground text-base text-justify">
-            Gabung dengan Travelo dan mulai rencanakan perjalanan impianmu dalam
-            hitungan detik — cerdas, simpel, dan aman.
+            Gabung dengan Travelo dan mulai rencanakan perjalanan impianmu
+            dengan cerdas, simpel, dan aman.
           </DialogDescription>
 
           <Button onClick={handleLogin}>
             <FcGoogle className="h-6 w-6" />
-            Sign In With Google
+            Masuk dengan Google
           </Button>
         </DialogHeader>
       </DialogContent>

@@ -1,26 +1,20 @@
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Compass, Map, Hotel } from "lucide-react";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+import travelSvg from "@/assets/illustration-travel.png";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const { login, user } = useAuthStore();
-
-  const handleNewTrip = async () => {
-    if (!user) {
-      await login();
-    } else {
-      navigate("/create-trip");
-    }
-  };
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-20 space-y-20">
-      {/* Hero */}
-      <div className="space-y-6 max-w-2xl">
+    <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-20 space-y-24">
+      {/* Hero Section */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="space-y-6 max-w-2xl"
+      >
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-          Temukan Petualangan Berikutnya Bersama AI
-          <br />
+          Temukan Petualangan Berikutnya Bersama AI Agent <br />
           <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
             Travelo
           </span>
@@ -30,13 +24,31 @@ const Home = () => {
           AI pintar, kami bantu kamu memilih destinasi, menyusun itinerary, dan
           menemukan hotel terbaik — secara otomatis dan personal.
         </p>
-        <Button size="lg" onCLick={handleNewTrip} className="rounded-full px-4">
+        <Button size="lg" className="rounded-full px-8 text-md shadow">
           Mulai Sekarang
         </Button>
-      </div>
+      </motion.div>
 
-      {/* Fitur */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl">
+      {/* Ilustrasi */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <img
+          src={travelSvg}
+          alt="AI Travel Planner"
+          className="w-full max-w-lg"
+        />
+      </motion.div>
+
+      {/* Fitur Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl"
+      >
         <Feature
           icon={<Compass className="w-8 h-8 text-blue-500" />}
           title="Destinasi Personalisasi"
@@ -52,7 +64,7 @@ const Home = () => {
           title="Rekomendasi Hotel"
           description="Temukan penginapan dengan harga terbaik dan ulasan terpercaya, semuanya dalam satu klik."
         />
-      </div>
+      </motion.div>
     </section>
   );
 };
