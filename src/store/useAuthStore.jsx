@@ -1,52 +1,52 @@
 import { create } from "zustand";
-import toast from "react-hot-toast";
-import callApi from "@/api/callApi";
 import { persist } from "zustand/middleware";
-import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import { auth } from "@/components/firebase";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 export const useAuthStore = create(
   persist(
     (set) => ({
       user: null,
-      accessToken: null,
       loading: false,
-      checkingAuth: true,
-      getUserProfile: async (token) => {
+
+      login: async () => {
+        const provider = new GoogleAuthProvider();
         try {
-          const response = await callApi.getUserProfile(token);
-          set({ user: response.data });
-          window.location.reload();
+          await signInWithPopup(auth, provider);
         } catch (error) {
-          console.log(error);
+          console.error("Login failed:", error.message);
         }
       },
 
-      login: () =>
-        useGoogleLogin({
-          onSuccess: (codeResp) => GetUserProfile(codeResp),
-          onError: (error) => console.log(error),
-        }),
+      authCheck: () => {
+        set({ loading: true });
+        onAuthStateChanged(auth, (currentUser) => {
+          set({ user: currentUser, loading: false });
+        });
+      },
 
       logout: async () => {
         try {
-          googleLogout();
+          await signOut(auth);
           set({ user: null });
-          window.location.reload();
         } catch (error) {
-          console.log(error);
+          console.error("Logout failed:", error.message);
         }
       },
     }),
-
     {
       name: "auth",
       storage: {
         getItem: (name) => sessionStorage.getItem(name),
-        removeItem: (name) => sessionStorage.removeItem(name),
         setItem: (name, value) => sessionStorage.setItem(name, value),
+        removeItem: (name) => sessionStorage.removeItem(name),
       },
       partialize: (state) => ({
-        accessToken: state.accessToken,
         user: state.user,
       }),
     }
