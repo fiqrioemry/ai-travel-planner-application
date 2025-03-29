@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import useAuthChecking from "./hooks/useAuthChecking";
 
 function App() {
-  // const { checkingAuth } = useAuthChecking();
+  const { checkingAuth } = useAuthChecking();
 
-  // if (checkingAuth) return <PageLoading />;
+  if (checkingAuth) return <PageLoading />;
 
   return (
     <>
