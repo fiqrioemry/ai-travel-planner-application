@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Compass, Map, Hotel } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,10 +17,16 @@ const Home = () => {
       navigate("/create-trip");
     }
   };
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-20 space-y-20">
       {/* Hero */}
-      <div className="space-y-6 max-w-2xl">
+      <motion.div
+        className="space-y-6 max-w-2xl mb-12"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
           Temukan Petualangan Berikutnya Bersama AI
           <br />
@@ -32,13 +39,31 @@ const Home = () => {
           AI pintar, kami bantu kamu memilih destinasi, menyusun itinerary, dan
           menemukan hotel terbaik — secara otomatis dan personal.
         </p>
-        <Button size="lg" onClick={handleNewTrip} className="rounded-full px-4">
-          Mulai Sekarang
-        </Button>
-      </div>
+        <div className="mt-12">
+          <Button
+            size="lg"
+            onClick={handleNewTrip}
+            className="rounded-full px-4 "
+          >
+            Mulai Sekarang
+          </Button>
+        </div>
+      </motion.div>
 
       {/* Fitur */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl">
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl"
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.2,
+            },
+          },
+        }}
+      >
         <Feature
           icon={<Compass className="w-8 h-8 text-blue-500" />}
           title="Destinasi Personalisasi"
@@ -54,17 +79,19 @@ const Home = () => {
           title="Rekomendasi Hotel"
           description="Temukan penginapan dengan harga terbaik dan ulasan terpercaya, semuanya dalam satu klik."
         />
-      </div>
+      </motion.div>
     </section>
   );
 };
 
-const Feature = ({ icon, title, description }) => (
-  <div className="text-left space-y-3">
-    <div>{icon}</div>
-    <h3 className="font-semibold text-lg">{title}</h3>
-    <p className="text-muted-foreground text-sm">{description}</p>
-  </div>
-);
+const Feature = ({ icon, title, description }) => {
+  return (
+    <div className="text-left space-y-3 p-4 rounded-md hover:bg-muted/30 transition">
+      <div>{icon}</div>
+      <h3 className="font-semibold text-lg">{title}</h3>
+      <p className="text-muted-foreground text-sm">{description}</p>
+    </div>
+  );
+};
 
 export default Home;

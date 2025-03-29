@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="w-full border-t mt-8 py-6 text-center text-sm text-muted-foreground">
+    <footer className="w-full border-t mt-4 py-4 text-center text-sm text-muted-foreground">
       <div>Travelo Copyright 2025</div>
       <div>
         Dibuat dengan ❤️ oleh{" "}

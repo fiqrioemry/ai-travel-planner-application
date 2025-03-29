@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const descriptions = [
-  "Sedang mempersiapkan perjalananmu",
-  "Mencari liburan terbaik",
+  "Mempersiapkan perjalananmu",
+  "Mencari pilihan terbaik",
   "Menyesuaikan rekomendasi destinasi",
   "Mengumpulkan tiket dan akomodasi",
 ];
