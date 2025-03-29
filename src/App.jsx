@@ -11,6 +11,7 @@ import { ProtectedRoute } from "./middleware";
 import Layout from "./components/layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
+import LoadingPage from "./components/LoadingPage";
 
 function App() {
   const { loading, authCheck } = useAuthStore();
@@ -19,7 +20,7 @@ function App() {
     authCheck();
   }, [authCheck]);
 
-  if (loading) return null;
+  if (loading) return <LoadingPage />;
 
   return (
     <>

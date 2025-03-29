@@ -16,16 +16,18 @@ function Header() {
   const { user, login, logout } = useAuthStore();
 
   return (
-    <nav className="container mx-auto p-3 shadow-sm flex justify-between items-center">
-      <a href="/">
-        <Logo />
-      </a>
-      <div>
-        {user ? (
-          <UserMenu user={user} logout={logout} />
-        ) : (
-          <GoogleLogin login={login} />
-        )}
+    <nav className="border-b py-3">
+      <div className="container mx-auto flex items-center justify-between ">
+        <a href="/">
+          <Logo />
+        </a>
+        <div>
+          {user ? (
+            <UserMenu user={user} logout={logout} />
+          ) : (
+            <GoogleLogin login={login} />
+          )}
+        </div>
       </div>
     </nav>
   );
