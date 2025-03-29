@@ -10,10 +10,7 @@ function App() {
   return (
     <>
       <Toaster />
-      <Routes>
-        <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
-      </Routes>
+      <Routes></Routes>
     </>
   );
 }
