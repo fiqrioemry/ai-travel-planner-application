@@ -2,7 +2,8 @@
 import Home from "./pages/Home";
 import SavedTrip from "./pages/SavedTrip";
 import CreateTrip from "./pages/CreateTrip";
-import DisplayTrip from "./pages/DisplayTrip";
+import DetailTrip from "./pages/DetailTrip";
+import LoadingPage from "./components/LoadingPage";
 
 // configuration
 import { useEffect } from "react";
@@ -11,7 +12,6 @@ import { ProtectedRoute } from "./middleware";
 import Layout from "./components/layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
-import LoadingPage from "./components/LoadingPage";
 
 function App() {
   const { loading, authCheck } = useAuthStore();
@@ -38,10 +38,10 @@ function App() {
             }
           />
           <Route
-            path="trip/:id"
+            path="trip/:tripId"
             element={
               <ProtectedRoute>
-                <DisplayTrip />
+                <DetailTrip />
               </ProtectedRoute>
             }
           />

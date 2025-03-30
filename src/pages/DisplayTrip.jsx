@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 
-const DisplayTrip = () => {
-  const { id } = useParams();
-  console.log(id);
+const DetailTrip = () => {
+  const { tripId } = useParams();
+  console.log(tripId);
   return (
     <section className="h-screen flex items-center justify-center">
       <h1>Display Trip Page</h1>
@@ -10,4 +10,4 @@ const DisplayTrip = () => {
   );
 };
 
-export default DisplayTrip;
+export default DetailTrip;

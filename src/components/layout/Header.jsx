@@ -8,24 +8,36 @@ import Logo from "@/components/Logo";
 import { useTheme } from "@/hooks/useTheme";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { LogOut, Moon, Sun } from "lucide-react";
+import { LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 import GoogleLogin from "@/components/GoogleLogin";
 import { useAuthStore } from "@/store/useAuthStore";
+import DarkModeToggle from "../DarkModeToggle";
 
 function Header() {
+  const { isDark, toggleDark } = useTheme();
   const { user, login, logout } = useAuthStore();
 
   return (
-    <nav className="border-b py-3">
+    <nav className="border-b py-3 px-4 md:px-0">
       <div className="container mx-auto flex items-center justify-between ">
         <a href="/">
           <Logo />
         </a>
         <div>
           {user ? (
-            <UserMenu user={user} logout={logout} />
+            <UserMenu
+              user={user}
+              logout={logout}
+              isDark={isDark}
+              toggleDark={toggleDark}
+            />
           ) : (
-            <GoogleLogin login={login} />
+            <div className="flex gap-2">
+              <div className="flex items-center justify-between px-2 gap-2">
+                <DarkModeToggle isDark={isDark} toggleDark={toggleDark} />
+              </div>
+              <GoogleLogin login={login} />
+            </div>
           )}
         </div>
       </div>
@@ -35,12 +47,13 @@ function Header() {
 
 export default Header;
 
-const UserMenu = ({ user, logout }) => {
-  const { isDark, toggleDark } = useTheme();
+const UserMenu = ({ user, logout, isDark, toggleDark }) => {
   return (
     <div className="flex items-center gap-3">
       <a href="/create-trip">
-        <Button className="rounded-full px-4">+ Atur liburan</Button>
+        <Button className="rounded-full px-4">
+          <PlusCircle /> <span className="hidden md:block">Trip baru</span>
+        </Button>
       </a>
       <a href="/my-trips">
         <Button variant="outline" className="rounded-full px-4">
