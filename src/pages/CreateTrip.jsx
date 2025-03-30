@@ -36,9 +36,9 @@ function CreateTrip() {
       {options.map((opt) => (
         <motion.div
           key={opt}
-          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 20 }}
         >
           <button
             type="button"
@@ -66,10 +66,10 @@ function CreateTrip() {
           {step < fields.length && (
             <motion.div
               key={currentField.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, y: 40 }}
             >
               <div className="flex justify-start mb-4">
                 {step > 0 && (
@@ -91,10 +91,10 @@ function CreateTrip() {
           {step === fields.length && (
             <motion.div
               key="submit"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, y: 40 }}
               className="text-center"
             >
               <div className="mb-4 flex justify-start">

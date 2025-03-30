@@ -4,9 +4,11 @@ const Footer = () => {
       <div>Travelo Copyright 2025</div>
       <div>
         Dibuat dengan ❤️ oleh{" "}
-        <span className="font-medium text-black dark:text-white">
-          ahmadfiqrioemry
-        </span>
+        <a href="https://www.ahmadfiqrioemry.com">
+          <span className="font-medium text-black dark:text-white">
+            ahmadfiqrioemry
+          </span>
+        </a>
       </div>
     </footer>
   );
