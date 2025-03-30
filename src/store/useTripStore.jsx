@@ -1,11 +1,11 @@
-/* eslint-disable no-undef */
 import { create } from "zustand";
-import { db } from "@/api/firebase.js";
+import { db } from "@/api/firebase";
 import { persist } from "zustand/middleware";
 import { chatSession } from "../api/geminiAI";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, addDoc, collection, getDoc } from "firebase/firestore";
+import { useAuthStore } from "./useAuthStore";
 
-const assignValueToTemplate = (tripForm) => ({
+const generateTemplate = (tripForm) => ({
   instruction:
     "Buatkan itinerary perjalanan liburan yang terstruktur dan menyenangkan berdasarkan parameter berikut. Itinerary harus mencakup aktivitas harian, rekomendasi tempat wisata, serta tips perjalanan yang sesuai dengan preferensi pengguna. sertakan juga referensi untuk kisaran harga tiket dengan pilihan moda transportasi yang menyesuaikan tipe dan budget",
   parameters: {
@@ -49,35 +49,43 @@ export const useTripStore = create(
     loading: false,
 
     saveTripResult: async (tripForm, tripResult) => {
-      await setDoc(doc(db, "trips"), {
-        tripSelection: tripForm,
-        tripData: tripResult,
-        email: user?.email,
-        userId: user?.uid,
-      });
+      try {
+        const user = useAuthStore.getState().user;
+        const docRef = await addDoc(collection(db, "trips"), {
+          tripSelection: tripForm,
+          tripData: tripResult,
+          email: user?.email,
+          userId: user?.uid,
+          createdAt: new Date(),
+        });
+
+        return docRef.id;
+      } catch (error) {
+        console.error("Error saving trip:", error);
+        throw error;
+      }
     },
 
     generateNewTrip: async (formData) => {
       set({ loading: true });
 
-      const template = assignValueToTemplate(formData);
+      const template = generateTemplate(formData);
 
       const prompt = generatePromptText(template);
 
       try {
         const result = await chatSession.sendMessage(prompt);
-        const response = await result.response.text();
+        const response = result.response.text();
 
-        // Cari potongan JSON di dalam response AI
         const start = response.indexOf("{");
         const end = response.lastIndexOf("}") + 1;
         const jsonText = response.slice(start, end);
 
         const parsed = JSON.parse(jsonText);
 
-        await get().saveTripResult(formData, parsed);
+        const tripId = await get().saveTripResult(formData, parsed);
 
-        window.location.replace("/my-trips");
+        window.location.replace(`/trip/${tripId}`);
       } catch (error) {
         console.error("Generate Trip Error:", error);
       } finally {
@@ -89,19 +97,15 @@ export const useTripStore = create(
       try {
         const documentId = doc(db, "trips", tripId);
         const result = await getDoc(documentId);
-        set({ trip: result.data() });
+        if (result.exists()) {
+          set({ trip: result.data() });
+        } else {
+          console.warn("Trip not found");
+          set({ trip: [] });
+        }
       } catch (error) {
         console.error("Generate Trip Error:", error);
-      }
-    },
-
-    getAllTrip: async (userId) => {
-      try {
-        const documentId = doc(db, "trips", userId);
-        const result = await getDoc(documentId);
-        set({ trip: result.data() });
-      } catch (error) {
-        console.error("Generate Trip Error:", error);
+        set({ trip: [] });
       }
     },
   }))
