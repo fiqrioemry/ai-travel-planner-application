@@ -2,8 +2,8 @@ import Header from "./Header";
 import { Fragment } from "react";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
-import LoadingTripCreation from "../LoadingTripCreation";
-import { useTripStore } from "../../store/useTripStore";
+import { useTripStore } from "@/store/useTripStore";
+import LoadingTripCreation from "@/components/LoadingTripCreation";
 
 const Layout = () => {
   const { loading } = useTripStore();
