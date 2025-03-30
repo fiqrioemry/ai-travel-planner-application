@@ -94,12 +94,4 @@
   h3 {
     @apply text-lg md:text-xl font-semibold capitalize;
   }
-
-  h4 {
-    @apply text-base md:text-lg font-medium capitalize;
-  }
-
-  h5 {
-    @apply text-xs md:text-sm font-medium capitalize;
-  }
 }
