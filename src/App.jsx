@@ -13,6 +13,8 @@ import { ProtectedRoute } from "./middleware";
 import Layout from "./components/layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
+import NotFound from "./pages/NotFound";
+import ScrollToTop from "./hooks/useScrollToTop";
 
 function App() {
   useTheme();
@@ -27,7 +29,7 @@ function App() {
   return (
     <>
       <Toaster />
-
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -39,14 +41,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="trip/:tripId"
-            element={
-              <ProtectedRoute>
-                <DetailTrip />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="trip/:tripId" element={<DetailTrip />} />
 
           <Route
             path="create-trip"
@@ -57,6 +52,8 @@ function App() {
             }
           />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

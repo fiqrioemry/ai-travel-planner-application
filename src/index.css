@@ -102,8 +102,4 @@
   h5 {
     @apply text-xs md:text-sm font-medium capitalize;
   }
-
-  h6 {
-    @apply text-xs text-red-500;
-  }
 }

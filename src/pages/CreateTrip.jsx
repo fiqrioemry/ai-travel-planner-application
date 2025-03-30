@@ -1,89 +1,14 @@
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTripStore } from "../store/useTripStore";
+import { useTripStore } from "@/store/useTripStore";
 import { motion, AnimatePresence } from "framer-motion";
-
-const budgets = ["Hemat", "Menengah", "Mewah"];
-const travelTypes = ["Solo", "Couple", "Family"];
-const durations = ["3 Hari", "5 Hari", "7 Hari"];
-const activityLevels = ["Santai", "Seimbang", "Padat"];
-const interests = ["Kuliner", "Belanja", "Wisata Alam", "Sejarah"];
-const cities = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar"];
-
-const emojiMap = {
-  Santai: "🛌",
-  Seimbang: "🚶‍♂️",
-  Padat: "🏃‍♀️",
-  Kuliner: "🍽️",
-  Belanja: "🛍️",
-  "Wisata Alam": "🏞️",
-  Sejarah: "🏛️",
-  Hemat: "💸",
-  Menengah: "💵",
-  Mewah: "💎",
-  Solo: "🧍",
-  Couple: "👫",
-  Family: "👨‍👩‍👧‍👦",
-  "3 Hari": "📅",
-  "5 Hari": "🗓️",
-  "7 Hari": "📆",
-  Jakarta: "🌇",
-  Surabaya: "🌆",
-  Bandung: "🌄",
-  Medan: "🏙️",
-  Makassar: "🌊",
-};
-
-const tripFormInitial = {
-  departure: "",
-  destination: "",
-  duration: "",
-  travelType: "",
-  budget: "",
-  interest: "",
-  activityLevel: "",
-};
+import { emojiMap, fields, tripFormInitial } from "@/config/state";
 
 function CreateTrip() {
   const [step, setStep] = useState(0);
   const { generateNewTrip } = useTripStore();
   const [formData, setFormData] = useState(tripFormInitial);
-
-  const fields = [
-    {
-      name: "departure",
-      label: "Dari mana kamu akan berangkat?",
-      options: cities,
-    },
-    { name: "destination", label: "Tujuan liburan kamu?", options: cities },
-    {
-      name: "duration",
-      label: "Hampir selesai, Berapa lama kamu ingin liburan?",
-      options: durations,
-    },
-    {
-      name: "travelType",
-      label: "Kamu akan bepergian dengan siapa?",
-      options: travelTypes,
-    },
-    {
-      name: "budget",
-      label: "Sedikit lagi ya, pilih budget kamu",
-      options: budgets,
-    },
-    {
-      name: "interest",
-      label: " Apa yang paling kamu minati?",
-      options: interests,
-    },
-    {
-      name: "activityLevel",
-      label: "Terakhir nih, pilih tingkat aktivitas yang kamu inginkan",
-      options: activityLevels,
-    },
-  ];
-
   const currentField = fields[step];
 
   const handleInputChange = (name, value) => {
@@ -92,7 +17,7 @@ function CreateTrip() {
       if (step < fields.length - 1) {
         setStep((prev) => prev + 1);
       } else {
-        setStep((prev) => prev + 1); // move to submit button
+        setStep((prev) => prev + 1);
       }
     }, 300);
   };

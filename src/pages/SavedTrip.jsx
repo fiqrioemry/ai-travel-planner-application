@@ -1,37 +1,42 @@
-import { useEffect } from "react";
+import { emojiMap } from "@/config/state";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { useTripStore } from "@/store/useTripStore";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const emojiMap = {
-  Padat: "🏃‍♂️",
-  Seimbang: "🚶",
-  Santai: "🛌",
-  Hemat: "💸",
-  Menengah: "💵",
-  Mewah: "💎",
-  Solo: "🧍",
-  Couple: "👫",
-  Family: "👨‍👩‍👧‍👦",
-  Sejarah: "🏛️",
-  Kuliner: "🍽️",
-  Belanja: "🛍️",
-  "Wisata Alam": "🏞️",
-};
-
 const SavedTrip = () => {
-  const { getUserTrips, trips } = useTripStore();
   const navigate = useNavigate();
+  const [images, setImages] = useState({});
+  const { getUserTrips, trips, fetchWikipediaImage } = useTripStore();
 
   useEffect(() => {
     getUserTrips();
   }, [getUserTrips]);
 
-  if (!trips) {
-    return <Skeleton className="w-full h-96" />;
-  }
+  useEffect(() => {
+    if (trips?.length > 0) {
+      fetchImages();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trips]);
+
+  const fetchImages = async () => {
+    const newImages = {};
+
+    for (const trip of trips) {
+      const destination = trip.tripSelection.destination;
+      if (!images[destination]) {
+        const imageUrl = await fetchWikipediaImage(destination);
+        if (imageUrl) newImages[destination] = imageUrl;
+      }
+    }
+
+    setImages((prev) => ({ ...prev, ...newImages }));
+  };
+
+  if (!trips) return <Skeleton className="w-full h-96" />;
 
   if (trips.length === 0) {
     return (
@@ -70,8 +75,17 @@ const SavedTrip = () => {
             onClick={() => navigate(`/trip/${trip.id}`)}
             className="border rounded-lg p-5 shadow hover:shadow-lg cursor-pointer transition"
           >
+            <img
+              src={
+                images[trip.tripSelection.destination] || "/fallback-trip.jpg"
+              }
+              alt={trip.tripSelection.destination}
+              className="w-full h-48 object-cover rounded mb-4"
+            />
+
             <h2 className="text-xl font-semibold mb-2">
-              {trip.tripSelection.destination} - {trip.tripSelection.duration}
+              Liburan ke {trip.tripSelection.destination} -{" "}
+              {trip.tripSelection.duration}
             </h2>
 
             <div className="flex flex-wrap gap-2 mb-4">
