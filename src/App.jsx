@@ -12,8 +12,8 @@ import { Toaster } from "react-hot-toast";
 import { useTheme } from "./hooks/useTheme";
 import { ProtectedRoute } from "./middleware";
 import Layout from "./components/layout/Layout";
-import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./hooks/useScrollToTop";
+import { Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 
 function App() {
@@ -41,7 +41,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="trip/:tripId" element={<DetailTrip />} />
+          <Route
+            path="trip/:tripId"
+            element={
+              <ProtectedRoute>
+                <DetailTrip />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="create-trip"

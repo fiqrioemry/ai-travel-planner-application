@@ -13,7 +13,7 @@ import globalApi from "@/api/globalApi";
 import { persist } from "zustand/middleware";
 import { chatSession } from "@/api/geminiAI";
 import { useAuthStore } from "./useAuthStore";
-import { generatePromptText, generateTemplate } from "../config/prompt";
+import { generatePromptText, generateTemplate } from "@/config/prompt";
 
 export const useTripStore = create(
   persist((set, get) => ({

@@ -18,7 +18,7 @@ function Header() {
   const { user, login, logout } = useAuthStore();
 
   return (
-    <nav className="border-b py-6 px-6 md:px-0">
+    <nav className="border-b py-4 px-6 md:px-0">
       <div className="container mx-auto flex items-center justify-between ">
         <a href="/">
           <Logo />
