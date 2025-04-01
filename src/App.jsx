@@ -1,5 +1,6 @@
 // page
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import SavedTrip from "./pages/SavedTrip";
 import CreateTrip from "./pages/CreateTrip";
 import DetailTrip from "./pages/DetailTrip";
@@ -12,9 +13,8 @@ import { useTheme } from "./hooks/useTheme";
 import { ProtectedRoute } from "./middleware";
 import Layout from "./components/layout/Layout";
 import { Route, Routes } from "react-router-dom";
-import { useAuthStore } from "./store/useAuthStore";
-import NotFound from "./pages/NotFound";
 import ScrollToTop from "./hooks/useScrollToTop";
+import { useAuthStore } from "./store/useAuthStore";
 
 function App() {
   useTheme();

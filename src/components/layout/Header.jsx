@@ -6,19 +6,19 @@ import {
 } from "@/components/ui/popover";
 import Logo from "@/components/Logo";
 import { useTheme } from "@/hooks/useTheme";
+import DarkModeToggle from "../DarkModeToggle";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 import GoogleLogin from "@/components/GoogleLogin";
 import { useAuthStore } from "@/store/useAuthStore";
-import DarkModeToggle from "../DarkModeToggle";
+import { LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 
 function Header() {
   const { isDark, toggleDark } = useTheme();
   const { user, login, logout } = useAuthStore();
 
   return (
-    <nav className="border-b py-3 px-4 md:px-0">
+    <nav className="border-b py-6 px-6 md:px-0">
       <div className="container mx-auto flex items-center justify-between ">
         <a href="/">
           <Logo />

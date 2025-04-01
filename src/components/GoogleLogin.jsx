@@ -22,7 +22,9 @@ const GoogleLogin = ({ login }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="rounded-full px-6">Ayo mulai</Button>
+        <Button className="rounded-full text-xs md:text-base px-4 md:px-6">
+          Ayo mulai
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[420px] text-center py-10 px-6">
         <DialogHeader className="space-y-4">
