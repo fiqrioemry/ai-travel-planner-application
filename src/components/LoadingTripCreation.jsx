@@ -8,7 +8,7 @@ const descriptions = [
   "Mengumpulkan tiket dan akomodasi",
 ];
 
-const icons = ["🚀", "🚢"];
+const icons = ["🚀", "🚢", "✈️"];
 
 const LoadingTripCreation = () => {
   const [iconIndex, setIconIndex] = useState(0);
@@ -25,7 +25,6 @@ const LoadingTripCreation = () => {
   return (
     <div className="fixed top-0 bottom-0 right-0 left-0 flex items-center justify-center backdrop-blur-sm bg-black/20 z-50">
       <div className="flex flex-col items-center justify-center text-center space-y-6 py-10 min-w-96 rounded-lg shadow-lg bg-background">
-        {/* Floating Emoji with swipe animation */}
         <div className="h-20 w-20 text-6xl relative overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
@@ -51,7 +50,6 @@ const LoadingTripCreation = () => {
           </AnimatePresence>
         </div>
 
-        {/* Fading description text */}
         <div className="h-6">
           <AnimatePresence mode="wait">
             <motion.p
