@@ -16,7 +16,6 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
       className="w-12 h-6 rounded-full bg-muted flex items-center px-[2px] cursor-pointer relative"
       onClick={toggleDark}
     >
-      {/* Icon Switcher */}
       <motion.div
         layout
         transition={{ type: "spring", stiffness: 300, damping: 20 }}

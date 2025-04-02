@@ -22,7 +22,6 @@ export const emojiMap: Record<string, string> = {
   Makassar: "🌊",
 };
 
-// 🔷 Opsi form (readonly array untuk keamanan)
 export const budgets = ["Hemat", "Menengah", "Mewah"] as const;
 export const travelTypes = ["Solo", "Couple", "Family"] as const;
 export const durations = ["3 Hari", "5 Hari", "7 Hari"] as const;
@@ -41,7 +40,6 @@ export const cities = [
   "Makassar",
 ] as const;
 
-// 🔷 Tipe bantu dari array di atas
 export type Budget = (typeof budgets)[number];
 export type TravelType = (typeof travelTypes)[number];
 export type Duration = (typeof durations)[number];
@@ -49,7 +47,6 @@ export type ActivityLevel = (typeof activityLevels)[number];
 export type Interest = (typeof interests)[number];
 export type City = (typeof cities)[number];
 
-// 🔷 Struktur field untuk form builder
 export interface Field {
   name: keyof TripFormInitial;
   label: string;

@@ -3,8 +3,7 @@ import axios from "axios";
 const geopifyApi: string = import.meta.env.VITE_GEOPIFY_API_KEY;
 const geopifyUrl = "https://api.geoapify.com/v1/geocode/autocomplete?";
 
-// 🔹 Tipe respons dari Geoapify (sederhana, bisa diperluas)
-interface GeoapifyResponse {
+export interface GeoapifyResponse {
   results: {
     city: string;
     country: string;
@@ -14,7 +13,6 @@ interface GeoapifyResponse {
   }[];
 }
 
-// 🔹 Tipe response dari Wikipedia image API
 interface WikipediaImageResponse {
   query: {
     pages: {

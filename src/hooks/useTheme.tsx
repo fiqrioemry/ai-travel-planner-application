@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 
 export function useTheme() {
-  const [isDark, setIsDark] =
-    useState <
-    boolean >
-    (() => {
-      const saved = localStorage.getItem("theme");
-      if (saved !== null) {
-        return saved === "dark";
-      }
-      return true; // default: dark
-    });
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved !== null) {
+      return saved === "dark";
+    }
+    return true; // default: dark
+  });
 
   useEffect(() => {
     if (isDark) {

@@ -16,7 +16,7 @@ interface GoogleLoginProps {
 }
 
 const GoogleLogin: React.FC<GoogleLoginProps> = ({ login }) => {
-  const [open, setOpen] = useState < boolean > false;
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleLogin = async () => {
     await login();

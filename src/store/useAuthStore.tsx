@@ -10,7 +10,6 @@ import toast from "react-hot-toast";
 import { auth } from "@/api/firebase";
 import { persist } from "zustand/middleware";
 
-// 🔷 Type untuk state
 interface AuthState {
   user: User | null;
   loading: boolean;
@@ -19,7 +18,6 @@ interface AuthState {
   logout: () => Promise<void>;
 }
 
-// 🔷 Store dengan middleware persist
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({

@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { Compass, Map, Hotel } from "lucide-react";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "../store/useAuthStore";
 
 interface FeatureProps {
   icon: React.ReactNode;

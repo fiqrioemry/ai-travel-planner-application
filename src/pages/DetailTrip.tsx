@@ -1,9 +1,9 @@
-import NotFound from "./NotFound";
-import { emojiMap } from "@/config/state";
+import { emojiMap } from "../config/state";
 import { useParams } from "react-router-dom";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "../components/ui/badge";
 import React, { useEffect, useState } from "react";
-import { useTripStore } from "@/store/useTripStore";
+import { useTripStore } from "../store/useTripStore";
+import NotFound from "./NotFound";
 
 interface Activity {
   time: string;
@@ -27,28 +27,6 @@ interface Hotel {
   notes: string;
 }
 
-interface TripData {
-  summary: string;
-  daily_plan: DailyPlan[];
-  hotel_recommendation: Hotel[];
-  travel_tips: string[];
-}
-
-interface TripSelection {
-  departure: string;
-  destination: string;
-  duration: string;
-  travelType: string;
-  budget: string;
-  interest: string;
-  activityLevel: string;
-}
-
-interface Trip {
-  tripSelection: TripSelection;
-  tripData: TripData;
-}
-
 const DetailTrip: React.FC = () => {
   const { tripId } = useParams<{ tripId: string }>();
   const [image, setImage] = useState<string | null>(null);
@@ -61,18 +39,16 @@ const DetailTrip: React.FC = () => {
   }, [getTripDetail, tripId]);
 
   useEffect(() => {
-    if (trip?.tripSelection?.destination) {
+    if (trip && "tripSelection" in trip) {
       fetchWikipediaImage(trip.tripSelection.destination).then((img) => {
         if (img) setImage(img);
       });
     }
   }, [trip, fetchWikipediaImage]);
 
-  if (!trip) return null;
+  if (!trip || !("tripSelection" in trip)) return <NotFound />;
 
-  if ((trip as any).length === 0) return <NotFound />;
-
-  const { tripSelection, tripData } = trip as Trip;
+  const { tripSelection, tripData } = trip;
 
   return (
     <div className="max-w-5xl mx-auto p-4">
@@ -95,7 +71,7 @@ const DetailTrip: React.FC = () => {
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-8">
-        {Object.entries(tripSelection).map(([key, value]) => (
+        {Object.entries(tripSelection).map(([key, value]: [string, string]) => (
           <Badge key={key} variant="outline">
             {emojiMap[value] || ""} {value}
           </Badge>
@@ -113,12 +89,12 @@ const DetailTrip: React.FC = () => {
       {/* Daily Plan */}
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Rencana Harian</h2>
-        {tripData?.daily_plan?.map((day, idx) => (
+        {tripData?.daily_plan?.map((day: DailyPlan, idx: number) => (
           <div key={idx} className="mb-6">
             <h3 className="text-lg font-bold mb-1">{day.day}</h3>
             <p className="text-sm mb-2">Transportasi: {day.transportation}</p>
             <ul className="space-y-3">
-              {day.activities.map((act, i) => (
+              {day.activities.map((act: Activity, i: number) => (
                 <li key={i} className="p-3 border rounded">
                   <p className="font-medium">{act.time}</p>
                   <p className="text-gray-600">📍 {act.location}</p>
@@ -136,9 +112,11 @@ const DetailTrip: React.FC = () => {
                       </p>
                       <div className="pl-4">
                         <ul className="list-disc pl-5 text-sm text-gray-600">
-                          {act.recomendations.map((rec, idx) => (
-                            <li key={idx}>{rec}</li>
-                          ))}
+                          {act.recomendations.map(
+                            (rec: string, idx: number) => (
+                              <li key={idx}>{rec}</li>
+                            )
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -159,7 +137,7 @@ const DetailTrip: React.FC = () => {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Rekomendasi Hotel</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {tripData?.hotel_recommendation?.map((hotel, idx) => (
+          {tripData?.hotel_recommendation?.map((hotel: Hotel, idx: number) => (
             <div
               key={idx}
               className="border rounded-lg p-4 shadow-sm hover:shadow-md transition"
@@ -180,7 +158,7 @@ const DetailTrip: React.FC = () => {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Tips Perjalanan</h2>
         <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
-          {tripData?.travel_tips?.map((tip, idx) => (
+          {tripData?.travel_tips?.map((tip: string, idx: number) => (
             <li key={idx}>{tip}</li>
           ))}
         </ul>

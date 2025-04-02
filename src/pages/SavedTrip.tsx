@@ -3,31 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
-import { useTripStore } from "@/store/useTripStore";
 import { Skeleton } from "@/components/ui/skeleton";
-
-// 🔷 Tipe untuk struktur data trip
-interface TripSelection {
-  departure: string;
-  destination: string;
-  duration: string;
-  travelType: string;
-  budget: string;
-  interest: string;
-  activityLevel: string;
-}
-
-interface TripData {
-  summary: string;
-  [key: string]: any; // fleksibel jika ada properti tambahan
-}
-
-interface Trip {
-  id: string;
-  createdAt: { seconds: number };
-  tripSelection: TripSelection;
-  tripData: TripData;
-}
+import { useTripStore, type Trip } from "@/store/useTripStore";
 
 const SavedTrip: React.FC = () => {
   const navigate = useNavigate();
@@ -39,10 +16,9 @@ const SavedTrip: React.FC = () => {
   }, [getUserTrips]);
 
   useEffect(() => {
-    if (trips?.length > 0) {
+    if (Array.isArray(trips) && trips.length > 0) {
       fetchImages();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trips]);
 
   const fetchImages = async () => {
@@ -125,7 +101,11 @@ const SavedTrip: React.FC = () => {
 
             <div className="text-xs text-gray-400">
               Dibuat pada:{" "}
-              {new Date(trip.createdAt.seconds * 1000).toLocaleDateString()}
+              {new Date(
+                "seconds" in trip.createdAt
+                  ? trip.createdAt.seconds * 1000
+                  : trip.createdAt
+              ).toLocaleDateString()}
             </div>
           </div>
         ))}

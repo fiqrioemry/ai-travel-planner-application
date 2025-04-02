@@ -3,7 +3,12 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTripStore } from "@/store/useTripStore";
 import { motion, AnimatePresence } from "framer-motion";
-import { emojiMap, fields, tripFormInitial, TripFormInitial } from "@/config/state";
+import {
+  emojiMap,
+  fields,
+  tripFormInitial,
+  TripFormInitial,
+} from "@/config/state";
 
 const CreateTrip: React.FC = () => {
   const [step, setStep] = useState<number>(0);
@@ -31,7 +36,10 @@ const CreateTrip: React.FC = () => {
     generateNewTrip(formData);
   };
 
-  const renderOptions = (options: readonly string[], name: keyof TripFormInitial) => (
+  const renderOptions = (
+    options: readonly string[],
+    name: keyof TripFormInitial
+  ) => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
       {options.map((opt) => (
         <motion.div
@@ -73,7 +81,11 @@ const CreateTrip: React.FC = () => {
             >
               <div className="flex justify-start mb-4">
                 {step > 0 && (
-                  <Button className="w-36 rounded-full" type="button" onClick={handleBack}>
+                  <Button
+                    className="w-36 rounded-full"
+                    type="button"
+                    onClick={handleBack}
+                  >
                     <ArrowLeft />
                     <span>Kembali</span>
                   </Button>
@@ -94,7 +106,11 @@ const CreateTrip: React.FC = () => {
               className="text-center"
             >
               <div className="mb-4 flex justify-start">
-                <Button className="w-36 rounded-full" type="button" onClick={handleBack}>
+                <Button
+                  className="w-36 rounded-full"
+                  type="button"
+                  onClick={handleBack}
+                >
                   <ArrowLeft />
                   <span>Kembali</span>
                 </Button>
@@ -104,7 +120,10 @@ const CreateTrip: React.FC = () => {
                 Semua sudah siap! Klik tombol di bawah ini untuk membuat
                 perjalanan impianmu 🚀
               </h3>
-              <Button type="submit" className="text-md px-8 py-4 rounded-full shadow-lg">
+              <Button
+                type="submit"
+                className="text-md px-8 py-4 rounded-full shadow-lg"
+              >
                 Generate Trip
               </Button>
             </motion.div>

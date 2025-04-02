@@ -1,6 +1,5 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-
 // ✅ Variants styling
 const variants = {
   default: "px-3 focus:outline-primary border rounded-md",

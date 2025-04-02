@@ -9,16 +9,16 @@ import {
 } from "firebase/firestore";
 import { create } from "zustand";
 import { db } from "@/api/firebase";
-import globalApi from "@/api/globalApi";
 import { persist } from "zustand/middleware";
 import { chatSession } from "@/api/geminiAI";
 import { useAuthStore } from "./useAuthStore";
+import globalApi, { GeoapifyResponse } from "@/api/globalApi";
 import { generatePromptText, generateTemplate } from "@/config/prompt";
 
 export interface TripSelection {
   departure: string;
   destination: string;
-  duration: string;
+  duration: number;
   travelType: string;
   budget: string;
   interest: string;
@@ -67,7 +67,7 @@ export interface Trip {
 interface TripStoreState {
   trip: Trip | null | [];
   trips: Trip[] | null;
-  location: string | null;
+  location: GeoapifyResponse | null;
   loading: boolean;
   searching: boolean;
 
