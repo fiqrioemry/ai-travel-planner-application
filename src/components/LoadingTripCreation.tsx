@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 
-const descriptions = [
-  "Mempersiapkan perjalananmu",
+const descriptions: string[] = [
   "Mencari pilihan terbaik",
-  "Menyesuaikan rekomendasi destinasi",
+  "Mempersiapkan perjalananmu",
   "Mengumpulkan tiket dan akomodasi",
+  "Menyesuaikan rekomendasi destinasi",
 ];
 
-const icons = ["🚀", "🚢", "✈️"];
+const icons: string[] = ["🚀", "🚢", "✈️"];
 
-const LoadingTripCreation = () => {
-  const [iconIndex, setIconIndex] = useState(0);
-  const [descIndex, setDescIndex] = useState(0);
+const LoadingTripCreation: React.FC = () => {
+  const [iconIndex, setIconIndex] = useState<number>(0);
+  const [descIndex, setDescIndex] = useState<number>(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,10 +30,10 @@ const LoadingTripCreation = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={iconIndex}
-              initial={{ x: 40, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
               exit={{ x: -40, opacity: 0 }}
               transition={{ duration: 0.5 }}
+              animate={{ x: 0, opacity: 1 }}
+              initial={{ x: 40, opacity: 0 }}
               className="absolute w-full h-full flex items-center justify-center"
             >
               <motion.div
@@ -54,9 +55,9 @@ const LoadingTripCreation = () => {
           <AnimatePresence mode="wait">
             <motion.p
               key={descIndex}
+              exit={{ opacity: 0 }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               className="text-base font-medium"
             >

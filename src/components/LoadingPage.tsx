@@ -1,6 +1,7 @@
+import React from "react";
 import Logo from "@/components/Logo";
 
-const LoadingPage = () => {
+const LoadingPage: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="relative w-32 h-32">

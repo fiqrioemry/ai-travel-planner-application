@@ -1,4 +1,28 @@
-export const generateTemplate = (tripForm) => ({
+export interface TripForm {
+  departure: string;
+  destination: string;
+  duration: number;
+  travelType: string;
+  budget: string;
+  interest: string;
+  activityLevel: string;
+}
+
+export interface Template {
+  instruction: string;
+  parameters: {
+    departure: string,
+    destination: string,
+    duration: string,
+    travelType: string,
+    budget: string,
+    interest: string,
+    activityLevel: string,
+  };
+  output_format: string;
+}
+
+export const generateTemplate = (tripForm: TripForm): Template => ({
   instruction: `
 Buatkan itinerary liburan selama ${tripForm.duration} yang **terstruktur, menyenangkan, dan realistis** berdasarkan parameter berikut. Hasilkan prompt / tulisan dalam bahasa Indonesia yang mudah dipahami.
 
@@ -48,20 +72,20 @@ Contoh struktur JSON tidak perlu ditampilkan. Langsung hasil akhir dalam format 
 `.trim(),
 });
 
-export const generatePromptText = (template) => {
+export const generatePromptText = (template: Template): string => {
   return `
-    ${template.instruction}
-    
-    Parameter:
-    - Keberangkatan: ${template.parameters.departure}
-    - Tujuan: ${template.parameters.destination}
-    - Durasi: ${template.parameters.duration}
-    - Tipe Perjalanan: ${template.parameters.travelType}
-    - Budget: ${template.parameters.budget}
-    - Minat: ${template.parameters.interest}
-    - Tingkat Aktivitas: ${template.parameters.activityLevel}
-    
-    Format Output:
-    ${template.output_format}
-      `.trim();
+${template.instruction}
+
+Parameter:
+- Keberangkatan: ${template.parameters.departure}
+- Tujuan: ${template.parameters.destination}
+- Durasi: ${template.parameters.duration}
+- Tipe Perjalanan: ${template.parameters.travelType}
+- Budget: ${template.parameters.budget}
+- Minat: ${template.parameters.interest}
+- Tingkat Aktivitas: ${template.parameters.activityLevel}
+
+Format Output:
+${template.output_format}
+`.trim();
 };

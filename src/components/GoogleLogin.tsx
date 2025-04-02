@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Dialog,
   DialogContent,
@@ -10,9 +9,14 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import Logo from "./Logo";
+import React from "react";
 
-const GoogleLogin = ({ login }) => {
-  const [open, setOpen] = useState(false);
+interface GoogleLoginProps {
+  login: () => Promise<void>;
+}
+
+const GoogleLogin: React.FC<GoogleLoginProps> = ({ login }) => {
+  const [open, setOpen] = useState < boolean > false;
 
   const handleLogin = async () => {
     await login();

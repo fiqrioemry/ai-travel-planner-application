@@ -1,8 +1,16 @@
-/* eslint-disable react/prop-types */
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 import { Moon, Sun } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const DarkModeToggle = ({ isDark, toggleDark }) => {
+interface DarkModeToggleProps {
+  isDark: boolean;
+  toggleDark: () => void;
+}
+
+const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
+  isDark,
+  toggleDark,
+}) => {
   return (
     <div
       className="w-12 h-6 rounded-full bg-muted flex items-center px-[2px] cursor-pointer relative"

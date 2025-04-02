@@ -16,7 +16,7 @@ import ScrollToTop from "./hooks/useScrollToTop";
 import { Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 
-function App() {
+const App: React.FC = () => {
   useTheme();
   const { loading, authCheck } = useAuthStore();
 
@@ -49,7 +49,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route
             path="create-trip"
             element={
@@ -59,11 +58,10 @@ function App() {
             }
           />
         </Route>
-
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
-}
+};
 
 export default App;
