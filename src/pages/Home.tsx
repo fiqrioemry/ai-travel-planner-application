@@ -1,11 +1,17 @@
-/* eslint-disable react/prop-types */
+import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Compass, Map, Hotel } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
 
-const Home = () => {
+interface FeatureProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const { login, user } = useAuthStore();
 
@@ -78,7 +84,7 @@ const Home = () => {
   );
 };
 
-const Feature = ({ icon, title, description }) => {
+const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
   return (
     <div className="text-left space-y-3 p-4 rounded-md hover:bg-muted/30 transition">
       <div>{icon}</div>

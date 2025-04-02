@@ -1,14 +1,37 @@
 import { emojiMap } from "@/config/state";
-import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from "react";
 import { useTripStore } from "@/store/useTripStore";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const SavedTrip = () => {
+// 🔷 Tipe untuk struktur data trip
+interface TripSelection {
+  departure: string;
+  destination: string;
+  duration: string;
+  travelType: string;
+  budget: string;
+  interest: string;
+  activityLevel: string;
+}
+
+interface TripData {
+  summary: string;
+  [key: string]: any; // fleksibel jika ada properti tambahan
+}
+
+interface Trip {
+  id: string;
+  createdAt: { seconds: number };
+  tripSelection: TripSelection;
+  tripData: TripData;
+}
+
+const SavedTrip: React.FC = () => {
   const navigate = useNavigate();
-  const [images, setImages] = useState({});
+  const [images, setImages] = useState<Record<string, string>>({});
   const { getUserTrips, trips, fetchWikipediaImage } = useTripStore();
 
   useEffect(() => {
@@ -23,9 +46,9 @@ const SavedTrip = () => {
   }, [trips]);
 
   const fetchImages = async () => {
-    const newImages = {};
+    const newImages: Record<string, string> = {};
 
-    for (const trip of trips) {
+    for (const trip of trips as Trip[]) {
       const destination = trip.tripSelection.destination;
       if (!images[destination]) {
         const imageUrl = await fetchWikipediaImage(destination);
@@ -69,7 +92,7 @@ const SavedTrip = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {trips.map((trip) => (
+        {(trips as Trip[]).map((trip) => (
           <div
             key={trip.id}
             onClick={() => navigate(`/trip/${trip.id}`)}

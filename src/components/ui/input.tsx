@@ -1,15 +1,24 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+// ✅ Variants styling
 const variants = {
   default: "px-3 focus:outline-primary border rounded-md",
-  flushed: "focus:border-primary outline-transparent border-b-2 ",
-  subtle: "px-3 focus:outline-primary bg-muted rounded-md ",
-  floating: "px-3 focus:outline-primary border rounded-md ",
-};
+  flushed: "focus:border-primary outline-transparent border-b-2",
+  subtle: "px-3 focus:outline-primary bg-muted rounded-md",
+  floating: "px-3 focus:outline-primary border rounded-md",
+} as const;
 
-const Input = React.forwardRef(
-  ({ className, type, variant = "default", ...props }, ref) => {
+// ✅ Tipe untuk variant
+type InputVariant = keyof typeof variants;
+
+// ✅ Props typing
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  variant?: InputVariant;
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type = "text", variant = "default", ...props }, ref) => {
     return (
       <div className={cn("relative w-full")}>
         <input

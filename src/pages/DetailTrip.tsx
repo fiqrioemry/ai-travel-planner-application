@@ -1,17 +1,63 @@
 import NotFound from "./NotFound";
 import { emojiMap } from "@/config/state";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import React, { useEffect, useState } from "react";
 import { useTripStore } from "@/store/useTripStore";
 
-const DetailTrip = () => {
-  const { tripId } = useParams();
-  const [image, setImage] = useState(null);
+interface Activity {
+  time: string;
+  location: string;
+  activity: string;
+  estimated_cost: string;
+  recomendations?: string[];
+  notes?: string;
+}
+
+interface DailyPlan {
+  day: string;
+  transportation: string;
+  activities: Activity[];
+}
+
+interface Hotel {
+  name: string;
+  type: string;
+  price_range: string;
+  notes: string;
+}
+
+interface TripData {
+  summary: string;
+  daily_plan: DailyPlan[];
+  hotel_recommendation: Hotel[];
+  travel_tips: string[];
+}
+
+interface TripSelection {
+  departure: string;
+  destination: string;
+  duration: string;
+  travelType: string;
+  budget: string;
+  interest: string;
+  activityLevel: string;
+}
+
+interface Trip {
+  tripSelection: TripSelection;
+  tripData: TripData;
+}
+
+const DetailTrip: React.FC = () => {
+  const { tripId } = useParams<{ tripId: string }>();
+  const [image, setImage] = useState<string | null>(null);
   const { getTripDetail, trip, fetchWikipediaImage } = useTripStore();
 
   useEffect(() => {
-    getTripDetail(tripId);
+    if (tripId) {
+      getTripDetail(tripId);
+    }
   }, [getTripDetail, tripId]);
 
   useEffect(() => {
@@ -24,9 +70,9 @@ const DetailTrip = () => {
 
   if (!trip) return null;
 
-  if (trip.length === 0) return <NotFound />;
+  if ((trip as any).length === 0) return <NotFound />;
 
-  const { tripSelection, tripData } = trip || {};
+  const { tripSelection, tripData } = trip as Trip;
 
   return (
     <div className="max-w-5xl mx-auto p-4">
@@ -70,7 +116,7 @@ const DetailTrip = () => {
         {tripData?.daily_plan?.map((day, idx) => (
           <div key={idx} className="mb-6">
             <h3 className="text-lg font-bold mb-1">{day.day}</h3>
-            <p className="text-sm mb-2 0">Transportasi: {day.transportation}</p>
+            <p className="text-sm mb-2">Transportasi: {day.transportation}</p>
             <ul className="space-y-3">
               {day.activities.map((act, i) => (
                 <li key={i} className="p-3 border rounded">

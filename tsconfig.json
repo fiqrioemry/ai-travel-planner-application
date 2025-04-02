@@ -2,10 +2,10 @@
   "files": [],
   "references": [
     {
-      "path": "./jsconfig.app.json"
+      "path": "./tsconfig.app.json"
     },
     {
-      "path": "./jsconfig.json"
+      "path": "./tsconfig.json"
     }
   ],
   "compilerOptions": {

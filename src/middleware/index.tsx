@@ -1,9 +1,12 @@
-/* eslint-disable react/prop-types */
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
 
-export const ProtectedRoute = ({ children }) => {
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { user } = useAuthStore();
 
   if (!user) {

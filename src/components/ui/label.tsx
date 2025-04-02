@@ -4,17 +4,23 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+// Variants untuk styling Label
 const labelVariants = cva(
   "text-sm font-medium capitalize leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 );
 
-const Label = React.forwardRef(({ className, ...props }, ref) => (
+// ✅ Komponen Label dengan ref dan typing props
+const Label = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+>(({ className, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
     className={cn(labelVariants(), className)}
     {...props}
   />
 ));
+
 Label.displayName = LabelPrimitive.Root.displayName;
 
 export { Label };
