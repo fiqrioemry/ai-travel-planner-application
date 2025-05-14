@@ -17,22 +17,22 @@ import globalApi, { GeoapifyResponse } from "@/api/globalApi";
 import { generatePromptText, generateTemplate } from "@/config/prompt";
 
 export interface TripSelection {
-  departure: string;
-  destination: string;
-  duration: number;
-  travelType: string;
   budget: string;
+  duration: number;
   interest: string;
+  departure: string;
+  travelType: string;
+  destination: string;
   activityLevel: string;
 }
 
 export interface Activity {
   time: string;
+  notes?: string;
   location: string;
   activity: string;
   estimated_cost: string;
   recomendations?: string[];
-  notes?: string;
 }
 
 export interface DailyPlan {
@@ -44,43 +44,44 @@ export interface DailyPlan {
 export interface Hotel {
   name: string;
   type: string;
-  price_range: string;
   notes: string;
+  price_range: string;
 }
 
 export interface TripData {
   summary: string;
+  travel_tips: string[];
   daily_plan: DailyPlan[];
   hotel_recommendation: Hotel[];
-  travel_tips: string[];
 }
 
 export interface Trip {
   id?: string;
-  tripSelection: TripSelection;
-  tripData: TripData;
   email?: string;
   userId?: string;
+  tripData: TripData;
+  tripSelection: TripSelection;
   createdAt: Date | { seconds: number };
 }
 
-// 🔷 State & Actions
 interface TripStoreState {
-  trip: Trip | null | [];
-  trips: Trip[] | null;
-  location: GeoapifyResponse | null;
   loading: boolean;
   searching: boolean;
+  trips: Trip[] | null;
+  trip: Trip | null | [];
+  location: GeoapifyResponse | null;
 
-  getPlaceName: (query: string) => Promise<void>;
   saveTripResult: (
     tripForm: TripSelection,
     tripResult: TripData
   ) => Promise<string | undefined>;
-  generateNewTrip: (formData: TripSelection) => Promise<void>;
+
   getUserTrips: () => Promise<Trip[]>;
-  fetchWikipediaImage: (placeName: string) => Promise<string | null>;
+  deleteTrip: (tripId: string) => Promise<void>;
+  getPlaceName: (query: string) => Promise<void>;
   getTripDetail: (tripId: string) => Promise<void>;
+  generateNewTrip: (formData: TripSelection) => Promise<void>;
+  fetchWikipediaImage: (placeName: string) => Promise<string | null>;
 }
 
 export const useTripStore = create<TripStoreState>()(
