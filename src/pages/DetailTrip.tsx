@@ -56,7 +56,7 @@ const DetailTrip: React.FC = () => {
       {image && (
         <div className="w-full h-72 md:h-96 overflow-hidden rounded-2xl shadow-lg mb-6">
           <img
-            src={image}
+            src={image !== null ? image : "/fallback-trip.jpg"}
             alt={tripSelection?.destination}
             className="w-full h-full object-cover"
           />

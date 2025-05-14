@@ -5,6 +5,7 @@ import {
   query,
   where,
   getDocs,
+  deleteDoc,
   collection,
 } from "firebase/firestore";
 import { create } from "zustand";
@@ -181,6 +182,17 @@ export const useTripStore = create<TripStoreState>()(
         } catch (err) {
           console.error("Wikipedia fetch error:", err);
           return null;
+        }
+      },
+      deleteTrip: async (tripId: string): Promise<void> => {
+        try {
+          await deleteDoc(doc(db, "trips", tripId));
+          const updatedTrips = (get().trips || []).filter(
+            (trip) => trip.id !== tripId
+          );
+          set({ trips: updatedTrips });
+        } catch (error) {
+          console.error("Error deleting trip:", error);
         }
       },
 

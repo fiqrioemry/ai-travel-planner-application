@@ -37,6 +37,7 @@ const SavedTrip: React.FC = () => {
 
   if (!trips) return <Skeleton className="w-full h-96" />;
 
+  console.log(trips);
   if (trips.length === 0) {
     return (
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-4">
@@ -83,8 +84,8 @@ const SavedTrip: React.FC = () => {
             />
 
             <h2 className="text-xl font-semibold mb-2">
-              Liburan ke {trip.tripSelection.destination} -{" "}
-              {trip.tripSelection.duration}
+              Liburan ke {trip.tripSelection.destination} -{""}
+              {trip.tripSelection.duration} Hari
             </h2>
 
             <div className="flex flex-wrap gap-2 mb-4">

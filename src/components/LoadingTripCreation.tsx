@@ -9,7 +9,7 @@ const descriptions: string[] = [
   "Menyesuaikan rekomendasi destinasi",
 ];
 
-const icons: string[] = ["🚀", "🚢", "✈️"];
+const icons: string[] = ["✈️", "🚢", "🚀"];
 
 const LoadingTripCreation: React.FC = () => {
   const [iconIndex, setIconIndex] = useState<number>(0);
