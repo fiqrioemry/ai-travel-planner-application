@@ -6,7 +6,7 @@ const NotFound: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center px-4">
+    <section className="min-h-screen flex flex-col items-center justify-center text-center max-w-7xl mx-auto px-4 ">
       <img
         src="/error-not-found.png"
         alt="Halaman tidak ditemukan"

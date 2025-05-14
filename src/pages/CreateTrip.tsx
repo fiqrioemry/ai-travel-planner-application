@@ -84,7 +84,7 @@ const CreateTrip: React.FC = () => {
   };
 
   return (
-    <div className="sm:px-10 md:px-32 lg:px-56 xl:px-72 px-5 mt-10">
+    <div className="max-w-7xl mx-auto px-4 mt-10">
       <h2 className="font-bold text-3xl">Buat Rencana Liburan Impianmu 🌍✨</h2>
       <p className="mt-3 text-gray-500 text-xl">
         Beri tahu kami sedikit tentang preferensimu, dan biarkan AI kami

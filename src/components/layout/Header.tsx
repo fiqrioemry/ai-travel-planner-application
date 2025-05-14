@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Popover,
   PopoverContent,
@@ -13,13 +12,24 @@ import GoogleLogin from "@/components/GoogleLogin";
 import { useAuthStore } from "@/store/useAuthStore";
 import { LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 
+interface UserMenuProps {
+  user: {
+    name: string;
+    email: string;
+    image?: string;
+  };
+  logout: () => void;
+  isDark: boolean;
+  toggleDark: () => void;
+}
+
 function Header() {
   const { isDark, toggleDark } = useTheme();
   const { user, login, logout } = useAuthStore();
 
   return (
     <nav className="border-b py-4 px-6 md:px-0">
-      <div className="container mx-auto flex items-center justify-between ">
+      <div className="max-w-7xl mx-auto px-4  flex items-center justify-between">
         <a href="/">
           <Logo />
         </a>
@@ -46,8 +56,12 @@ function Header() {
 }
 
 export default Header;
-
-const UserMenu = ({ user, logout, isDark, toggleDark }) => {
+const UserMenu: React.FC<UserMenuProps> = ({
+  user,
+  logout,
+  isDark,
+  toggleDark,
+}) => {
   return (
     <div className="flex items-center gap-3">
       <a href="/create-trip">
@@ -63,14 +77,17 @@ const UserMenu = ({ user, logout, isDark, toggleDark }) => {
       <Popover>
         <PopoverTrigger>
           <img
-            src={user?.photoURL}
-            alt={user?.displayName}
+            src={
+              user?.photoURL ||
+              "https://api.dicebear.com/6.x/initials/svg?seed=username"
+            }
+            alt={user?.displayName || "anonymous"}
             className="h-9 w-9 rounded-full"
           />
         </PopoverTrigger>
         <PopoverContent className="w-48 p-2 space-y-4">
           <div className="font-semibold text-sm px-2">
-            Halo, {user.displayName}
+            Halo, {user?.displayName || "anonymous"}
           </div>
 
           {/* Toggle Switch */}

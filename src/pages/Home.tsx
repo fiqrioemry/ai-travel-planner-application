@@ -25,10 +25,10 @@ const Home: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-20 space-y-20">
+    <section className="min-h-screen flex flex-col items-center justify-center text-center max-w-7xl mx-auto px-4  py-20 space-y-20">
       {/* Hero */}
       <motion.div
-        className="max-w-2xl mb-8"
+        className="max-w-4xl mb-8"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
 
       {/* Fitur */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl"
+        className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl"
         initial="hidden"
         animate="show"
         variants={{

@@ -79,7 +79,7 @@ const SavedTrip: React.FC = () => {
   }
 
   return (
-    <section className="min-h-screen max-w-6xl mx-auto p-6">
+    <section className="min-h-screen max-w-7xl mx-auto px-4 py-6">
       <h1 className="text-3xl font-bold mb-6">
         Daftar Rencana Perjalanan Kamu
       </h1>

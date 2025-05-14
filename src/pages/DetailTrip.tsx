@@ -51,12 +51,12 @@ const DetailTrip: React.FC = () => {
   const { tripSelection, tripData } = trip;
 
   return (
-    <div className="max-w-5xl mx-auto p-4">
+    <div className="max-w-7xl mx-auto px-4">
       {/* Hero Image */}
       {image && (
         <div className="w-full h-72 md:h-96 overflow-hidden rounded-2xl shadow-lg mb-6">
           <img
-            src={image !== null ? image : "/fallback-trip.jpg"}
+            src={image}
             alt={tripSelection?.destination}
             className="w-full h-full object-cover"
           />
