@@ -1,0 +1,57 @@
+🧳 “Kalau liburan bisa direncanakan AI, kenapa harus ribet?”
+
+
+
+Beberapa waktu terakhir, di sela-sela kerjaan sebagai freelance web developer, saya kepikiran bikin sesuatu yang simpel tapi bermanfaat.
+
+Bukan startup. Bukan produk gede. Cuma eksperimen kecil yang pengen bantu orang merencanakan liburannya... dengan cara paling malas — cukup klik & isi preferensi.
+
+
+
+Jadilah Travelo ✨
+
+Aplikasi web yang bantu kamu buat itinerary liburan otomatis, lengkap dari hari ke hari — hotel, aktivitas, tips, semua digenerate pakai Gemini AI 🧠
+
+
+
+Aplikasi ini dibangun menggunakan :
+
+- React + Tailwind (UI cepat dan bersih)
+
+- Zustand (state management ringan)
+
+- Firebase (authentication + database)
+
+- Geoapify (lokasi)
+
+- Framer Motion + ShadCN (smooth UX)
+
+
+
+🧠 Semua logika perencanaannya dihandle AI diintegrasikan menggunakan API gemini 1.5 — kamu tinggal pilih asal keberangkatan, tujuan, durasi, anggaran, gaya liburan... lalu boom, itinerary lengkap langsung jadi.
+
+
+
+📌 Fitur lain: 
+
+- Google login
+
+- Dark mode
+
+- lihat daftar trip, simpan & hapus trip 
+
+- Gambar destinasi otomatis dari Wikipedia (kadang suka error tapi ditaruh fallback url) 😄
+
+
+
+Proyek ini saya buat sepenuhnya dengan resource gratis. Jadi bagi yang ingin berinovasi proyek ini sangat recommended. Nggak sempurna, tapi cukup membuktikan: dengan tools open source & sedikit kreativitas, kamu bisa bikin sesuatu yang usable.
+
+🔗 Demo link : aitravelplanner.ahmadfiqrioemry.com
+
+🌐 Source code : 
+
+
+
+kalau ada feedback, ide, atau cuma mau ngobrol soal teknologi ini, saya sangat terbuka 🙌
+
+#ReactJS #AIProject #Gemini #WebDevelopment #OpenSource #BuildInPublic #TravelTech #SideProject

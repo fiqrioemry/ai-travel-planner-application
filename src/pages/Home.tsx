@@ -6,9 +6,9 @@ import { Compass, Map, Hotel } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 
 interface FeatureProps {
-  icon: React.ReactNode;
   title: string;
   description: string;
+  icon: React.ReactNode;
 }
 
 const Home: React.FC = () => {

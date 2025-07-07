@@ -1,45 +1,95 @@
-# 🛍️ Travelo - AI Trip Planner Web App
+![Thumbnail](./public/thumbnail.png)
 
-Travelo adalah aplikasi perencana perjalanan berbasis web yang menggunakan teknologi AI untuk membantu pengguna merancang itinerary perjalanan mereka secara otomatis, personal, dan cerdas hanya dalam hitungan detik. Thumbnail
+# 🛍️ Travelo – AI Trip Planner Web App
 
-## ✨ Short Description
+Travelo is an AI-powered travel planning application that helps users create fully customized and intelligent travel itineraries in just seconds. Users can define their preferences—such as departure location, destination, duration, and budget—and Travelo will instantly generate a complete day-by-day plan including activities, transportation, hotel suggestions, and local travel tips.
 
-Travelo memungkinkan pengguna memilih preferensi liburan (lokasi keberangkatan, tujuan, durasi, anggaran, dll), dan menghasilkan rencana perjalanan harian yang lengkap, termasuk aktivitas, transportasi, rekomendasi hotel, dan tips wisata. Aplikasi ini didukung oleh AI (Gemini), Firebase, dan React ecosystem.
+Built using Gemini AI, Firebase, and the modern React ecosystem, Travelo simplifies the trip planning experience and turns it into an interactive, efficient, and enjoyable process.
 
-## 🚀 Main Features
+## 1. Project Overview
 
-- 🔐 Login dengan Google (Firebase Auth)
-- 📍 Pilihan kota keberangkatan & tujuan
-- 🧠 **Generasi itinerary otomatis dengan AI **
-- 🏨 **Rekomendasi hotel & aktivitas harian **
-- 🔖 **Simpan & lihat detail trip yang telah dibuat **
-- 🌙 **Mode terang/gelap (dark mode toggle) **
-- 🗑️ **Hapus rencana perjalanan dengan konfirmasi **
-- 📱 Responsif dan mudah digunakan
+The goal of Travelo is to eliminate the hassle and complexity of manually planning trips. Whether you're a solo traveler or a family on vacation, finding activities, coordinating hotel stays, and organizing schedules can be overwhelming and time-consuming.
 
-## ⚙️ Tech-Stack
+Travelo addresses this by offering an intelligent, AI-assisted planning tool that generates personalized itineraries in real-time. The app captures user inputs through a guided step-by-step interface, processes them using Gemini AI, and presents structured travel recommendations instantly—empowering users with both flexibility and automation.
 
-### Front-end
+## 2. Project Requirements
 
-- React using Typescript
+- Build a user-friendly interface for creating and managing AI-generated travel itineraries
+
+- Integrate AI (Gemini) to generate smart and relevant travel plans
+
+- Authenticate users using Google Sign-In (Firebase Auth)
+
+- Store user trips in a secure and scalable database (Firebase Firestore)
+
+- Support city search and geolocation with external APIs (Geoapify)
+
+- Provide smooth UX including dark mode, step-by-step flow, and responsive design
+
+- Allow users to save, view, and delete trip plans easily
+
+## 3. The Challenge
+
+Creating an AI-driven travel planner involved balancing personalization and speed. The biggest challenge was ensuring accurate and engaging travel recommendations using user input, all within a few seconds. Furthermore, handling various integration points—AI prompt handling, API throttling, user session management, and real-time Firestore syncing—required a seamless data flow and robust architecture.
+
+Another key concern was managing user expectations with AI output, and designing a UI that guides without overwhelming.
+
+## 4. The Approach & Solution
+
+To address these challenges, Travelo was built as a modular React app with TypeScript and Zustand for clean state management. A multi-step form captures trip preferences, which are passed to Gemini AI via a curated and structured prompt. The output is parsed into an interactive itinerary with hotel and activity suggestions.
+
+User authentication and trip persistence are managed through Firebase Auth and Firestore, while Geoapify is used for flexible city lookup and location data. The interface uses Framer Motion for animations, TailwindCSS for responsive design, and Headless UI for accessible components.
+
+Each trip is saved under the user’s account and can be deleted or revisited from the “My Trips” dashboard. Dark mode toggle and mobile optimization ensure the app is pleasant to use in any environment.
+
+## 5. Key Features
+
+- 🔐 Google login (Firebase Auth)
+- 📍 Departure & destination city selection
+- 🧠 AI-generated itinerary
+- 🏨 Hotel & daily activity recommendations
+- 🔖 Save and view detailed trip plans
+- 🌙 Light/Dark mode toggle
+- 🗑️ Delete trip plans with confirmation
+- 📱 Responsive and user-friendly interface
+
+## 6. Tech Stack
+
+### 6.1 Frontend
+
+- React with Typescript
 - React Router
 - Zustand (State Management)
-- Framer Motion (Animasi)
+- Framer Motion (Animations)
 - TailwindCSS (Styling)
-- ShadCN UI / Headless UI untuk komponen Dialog
+- ShadCN UI / Headless UI (for Dialog components)
 
-### Backend / Services
+### 6.2 Backend / Services
 
 - Firebase Firestore
 - Firebase Auth (Google Login)
 - Gemini API (Google)
-- Geoapify API (lokasi)
+- Geoapify API (for location)
 
-## 🧰 Installation and Setup
+## 7. Folder Structure
 
-Follow these steps to get the project up and running on your local machine:
+```
+├── src/
+│   ├── api/               # Koneksi API: Firebase, Gemini, Geoapify
+│   ├── components/        # Reusable UI components (Button, Dialog, Badge, dsb)
+│   ├── hooks/             # Custom React hooks (theme, scrollToTop)
+│   ├── pages/             # Halaman utama (Home, CreateTrip, SavedTrip, DetailTrip)
+│   ├── store/             # Zustand store (useTripStore, useAuthStore)
+│   ├── config/            # State, constant, emojiMap, prompt templates
+│   ├── App.tsx            # Root routing dengan React Router
+│   └── main.tsx           # Entry point React
+```
 
-1. Clone this repository:
+## 8. Installation and Setup
+
+Follow these steps to run the project locally:
+
+1. Clone the repository:
 
 ```
 git clone https://github.com/fiqrioemry/ai_travel_planner_web_app.git
@@ -58,41 +108,26 @@ npm install
 npm rum
 ```
 
-App akan berjalan di http://localhost:5173
+App will be running on http://localhost:5173
 
-## 📁 Folder Structure
+## 9. How to Use
 
-```
-├── src/
-│   ├── api/               # Koneksi API: Firebase, Gemini, Geoapify
-│   ├── components/        # Reusable UI components (Button, Dialog, Badge, dsb)
-│   ├── hooks/             # Custom React hooks (theme, scrollToTop)
-│   ├── pages/             # Halaman utama (Home, CreateTrip, SavedTrip, DetailTrip)
-│   ├── store/             # Zustand store (useTripStore, useAuthStore)
-│   ├── config/            # State, constant, emojiMap, prompt templates
-│   ├── App.tsx            # Root routing dengan React Router
-│   └── main.tsx           # Entry point React
-```
+1. **Login**
 
-## 🧪 How to use
+   - Click the “Get Started” button on the homepage and log in with Google.
 
-1. Login
+2. **Create a Trip**
 
-- Klik tombol "Ayo mulai" di halaman utama, lalu login dengan Google.
+   - Go to `/create-trip`, fill out all trip preferences via a step-by-step UI, and click "Generate Trip".
 
-2. Buat Trip
+3. **Save & View Trip Details**
 
-- Navigasi ke /create-trip, isi semua preferensi perjalanan (dengan UI step-by-step), lalu klik "Generate Trip".
+   - Successfully generated trips will be stored in Firebase and can be revisited at `/my-trips`. Click on a card to view full details.
 
-3. Simpan & Lihat Detail Trip
+4. **Delete a Trip**
+   - Click the 🖑 icon at the top-right of a trip card. A confirmation dialog will appear before deletion.
 
-- Trip yang berhasil dibuat akan disimpan ke Firebase dan bisa dilihat kembali di /my-trips. Klik salah satu kartu untuk melihat detail lengkap.
-
-4. Hapus Trip
-
-- Klik ikon 🖑 di pojok kanan kartu trip. Konfirmasi dialog akan muncul sebelum dihapus permanen.
-
-## 🔐 Konfigurasi Environment (.env)
+## 🔐 Environment Configuration (.env)
 
 ```
 VITE_FIREBASE_API_KEY=your_api_key
@@ -105,40 +140,51 @@ VITE_GEMINI_API_KEY=your_gemini_key
 VITE_GEOAPIFY_KEY=your_geoapify_key
 ```
 
-## ☁️ Deployment
+## 9. Deployment
 
-saya menggunakan web-hosting untuk project ini, namun kamu juga bisa mendeploy ke platform Saas seperti vercel ataupun netlify :
+This project is hosted using a web hosting provider, but you can also deploy it to SaaS platforms such as **Vercel** or **Netlify**:
 
-- Hubungkan repo Git
-- Tambahkan .env ke dashboard environment
-- Atur build command:
+- Connect your Git repository
+- Add environment variables in the dashboard
+- Set build command:
 
 ```
   npm run build
 ```
 
-Output directory: dist
+- Output directory: `dist`
 
-## 🤝 Kontribusi
+## 🤝 Contribution
 
-Terbuka untuk Kontribusi bagi yang ingin mengembangkan fitur lebih jauh :
+Open for contributions to improve features:
 
-- Fork repository ini
-- Buat branch: git checkout -b fitur-anda
-- Commit perubahan: git commit -m 'feat: fitur baru'
-- Push ke branch: git push origin fitur-anda
-- Buka Pull Request
+- Fork the repository
+- Create a new branch: `git checkout -b your-feature`
+- Commit changes: `git commit -m 'feat: your feature'`
+- Push your branch: `git push origin your-feature`
+- Open a Pull Request
 
-## License
+## 🪪 License
 
 **MIT License**
 
-##👤 Developer - Author
+## 👤 Developer - Author
 
-- name : Ahmad Fiqri oemmry
-- 📁 email : fiqrioemry@gmail.com
-- 🌐 Linkedin : https://www.linkedin.com/in/ahmadfiqrioemry
+- Name: Ahmad Fiqri Oemry
+- 📧 Email: ahmadfiqrioemry@gmail.com
+- 🌐 LinkedIn: [linkedin.com/in/ahmadfiqrioemry](https://www.linkedin.com/in/ahmadfiqrioemry)
+- 🌐 Live preview : https://aitravelplanner.ahmadfiqrioemry.com
 
 ## 🖼️ Preview
 
-Berikut adalah beberapa preview tampilan untuk halaman website travel planner ini. Homepage Create Trip Detail Trip My Trip List
+Below are some previews of the AI travel planner web pages:
+
+**Homepage**  
+**Create Trip**  
+**Trip Details**  
+**My Trip List**
+
+![Preview1](./public/preview1.png)  
+![Preview2](./public/preview2.png)  
+![Preview3](./public/preview3.png)  
+![Preview4](./public/preview4.png)
