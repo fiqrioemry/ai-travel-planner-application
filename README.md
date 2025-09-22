@@ -1,4 +1,4 @@
-![Thumbnail](./public/thumbnail.png)
+![Thumbnail](./public/travelo-thumbnail.png)
 
 # 🛍️ Travelo – AI Trip Planner Web App
 
